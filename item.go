@@ -8,19 +8,19 @@ import (
 )
 
 type Item struct {
-	Id      int
-	Deleted bool
-	Type    string
-	By      string
-	Time    int
-	Text    string
-	Dead    bool
-	Parent  int
-	Kids    []int
-	Url     string
-	Score   int
-	Title   string
-	Parts   []int
+	Id      int    `json:"id"`
+	Deleted bool   `json:"deleted"`
+	Type    string `json:"type"`
+	By      string `json:"by"`
+	Time    int    `json:"time"`
+	Text    string `json:"text"`
+	Dead    bool   `json:"dead"`
+	Parent  int    `json:"parent"`
+	Kids    []int  `json:"kids"`
+	Url     string `json:"url"`
+	Score   int    `json:"score"`
+	Title   string `json:"title`
+	Parts   []int  `json:"parts"`
 }
 
 func GetItem(id int) (*Item, error) {
@@ -29,15 +29,18 @@ func GetItem(id int) (*Item, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
+
 	var item Item
 	err = json.Unmarshal(body, &item)
 	if err != nil {
 		return nil, err
 	}
+
 	return &item, nil
 }
