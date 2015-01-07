@@ -1,58 +1,47 @@
 # Go Package for the Hacker News API
 
-See the API docs for details: https://github.com/HackerNews/API  
+See the API docs for details on the JSON returned: https://github.com/HackerNews/API  
 
-## Usage
-
-### Get the ids of the top stories
+## Example
 
 ```
-topIds, err := hn.GetTopIds()
-```
+package main
 
-This returns an array of integer item ids.
+import (
+	"fmt"
 
-### Get a single item
+	"github.com/zeroviscosity/go-hn"
+)
 
-```
-item, err := hn.GetItem(id) // `id` is an int
-```
+func displayItem(rank int, id int) {
+	// Get a single item by its integer id
+	item, err := hn.GetItem(id)
+	if err != nil {
+		fmt.Printf("#%v ERROR: %v\n\n", rank, err)
+		return
+	}
 
-This returns an Item:
+	// Get a single user by his/her string id
+	user, err := hn.GetUser(item.By)
+	if err != nil {
+		fmt.Printf("#%v ERROR: %v\n\n", rank, err)
+		return
+	}
 
-```
-type Item struct {
-	Id      int
-	Deleted bool
-	Type    string
-	By      string
-	Time    int
-	Text    string
-	Dead    bool
-	Parent  int
-	Kids    []int
-	Url     string
-	Score   int
-	Title   string
-	Parts   []int
+	fmt.Printf("#%v \"%v\" by %v (karma: %v)\n\n", rank, item.Title, item.By, user.Karma)
 }
-```
 
-### Get a single user
+func main() {
+	// Get the top 100 item integer ids
+	topIds, err := hn.GetTopIds()
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
-```
-user, err := hn.GetUser(id) // `id` is a string
-```
-
-This retuns a User:
-
-```
-type User struct {
-	Id        string
-	Delay     int
-	Created   int
-	Karma     int
-	About     string
-	Submitted []int
+	// Display the top ten
+	for i := 0; i < 10; i++ {
+		displayItem(i+1, topIds[i])
+	}
 }
 ```
