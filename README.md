@@ -10,7 +10,7 @@ Add `"github.com/zeroviscosity/go-hn"` to your imports. You can then access the 
 topIds, err := hn.GetTopIds()
 ```
 
-This returns an array of the integer ids of the top 100 stories as described in the [https://github.com/HackerNews/API#top-stories](API docs).
+This returns an array of the integer ids of the top 100 stories as described in the [API docs](https://github.com/HackerNews/API#top-stories).
 
 #### Get an Item
 
@@ -18,7 +18,7 @@ This returns an array of the integer ids of the top 100 stories as described in 
 item, err := hn.GetItem(id)
 ```
 
-This takes an interger id and returns an `Item` struct corresponding to the JSON object returned by the API. As described in the [https://github.com/HackerNews/API#items](docs), its `type` field will be one of the following: 
+This takes an interger id and returns an `Item` struct corresponding to the JSON object returned by the API. As described in the [docs](https://github.com/HackerNews/API#items), its `type` field will be one of the following: 
 
 * "job"
 * "story"
@@ -52,7 +52,7 @@ type Item struct {
 user, err := hn.GetUser(item.By)
 ```
 
-This takes a string id (ie: username) and returns a `User` struct with fields matching those provided by the API. See the [https://github.com/HackerNews/API#users](docs) for more details.
+This takes a string id (ie: username) and returns a `User` struct with fields matching those provided by the API. See the [docs](https://github.com/HackerNews/API#users) for more details.
 
 ```go
 type User struct {
