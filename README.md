@@ -18,16 +18,7 @@ This returns an array of the integer ids of the top 100 stories as described in 
 item, err := hn.GetItem(id)
 ```
 
-This takes an interger id and returns an `Item` struct corresponding to the JSON object returned by the API. As described in the [docs](https://github.com/HackerNews/API#items), its `type` field will be one of the following: 
-
-* "job"
-* "story"
-* "comment"
-* "poll"
-* "pollopt"
-
-Depending on the `type`, some fields will be empty.
-
+This takes an interger id and returns an `Item` struct corresponding to the JSON object returned by the API. 
 ```go
 type Item struct {
 	Id      int    `json:"id"`
@@ -46,13 +37,23 @@ type Item struct {
 }
 ```
 
+As described in the [docs](https://github.com/HackerNews/API#items), its `type` field will be one of the following: 
+
+* "job"
+* "story"
+* "comment"
+* "poll"
+* "pollopt"
+
+Depending on the `type`, some fields will be empty.
+
 #### Get a User
 
 ```go
 user, err := hn.GetUser(item.By)
 ```
 
-This takes a string id (ie: username) and returns a `User` struct with fields matching those provided by the API. See the [docs](https://github.com/HackerNews/API#users) for more details.
+This takes a string id (ie: username) and returns a `User` struct with fields matching those provided by the API. 
 
 ```go
 type User struct {
@@ -64,6 +65,8 @@ type User struct {
 	Submitted []int  `json:"submitted"`
 }
 ```
+
+See the [docs](https://github.com/HackerNews/API#users) for more details.
 
 ## Example
 
